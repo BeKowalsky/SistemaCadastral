@@ -35,6 +35,7 @@ export default function RegisterForm() {
     street: '',
   });
 
+  // Mudar tudo isso, forma errada de fazer essas atribuições de valores.
   const handleChangeName = (event) => {
     setData({ ...data, name: event.target.value });
   };

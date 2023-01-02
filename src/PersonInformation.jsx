@@ -14,6 +14,7 @@ export default function PersonInformation({ person, deleteItem, setModal }) {
       >
         <FaTimesCircle className="text-xl" />
       </button>
+      {/* Generalizar divs repetidas */}
       <div className="flex justify-between items-center w-full mt-3">
         <h2 className="font-bold text-xl">Sobre:</h2>
         <div className="text-xs">

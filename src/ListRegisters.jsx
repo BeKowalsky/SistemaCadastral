@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { FaEye, FaTrashAlt } from 'react-icons/fa';
+import { isEmpty } from 'lodash';
+import React from 'react';
+import { FaExclamationCircle, FaEye, FaTrashAlt } from 'react-icons/fa';
 
 const TableItemHead = ({ children }) => {
   return <th className="border border-gray-300 bg-gray-200 p-2">{children}</th>;
@@ -11,20 +12,21 @@ const TableItemBody = ({ children }) => {
   );
 };
 
-export default function ListRegisters() {
-  const [registers, setRegisters] = useState();
-
-  React.useEffect(() => {
-    const registeredPeople = JSON.parse(window.localStorage.getItem('Person'));
-    if (registeredPeople !== null) setRegisters(registeredPeople);
-  }, []);
-
-  const handleClick = () => {};
+export default function ListRegisters({
+  registers,
+  setPerson,
+  setModal,
+  deleteItem,
+}) {
+  const handleOpenModal = (people) => {
+    setPerson(people);
+    setModal((previousDefault) => !previousDefault);
+  };
 
   return (
     <div className="flex flex-col items-center mt-10">
       <h2 className="text-2xl text-blue-800 uppercase">Lista de Cadastros:</h2>
-      {registers && (
+      {!isEmpty(registers) ? (
         <div className="rounded-md overflow-hidden border border-gray-300 mt-5 ">
           <table className="text-left">
             <thead>
@@ -33,8 +35,8 @@ export default function ListRegisters() {
                 <TableItemHead>Sobrenome</TableItemHead>
                 <TableItemHead>Email</TableItemHead>
                 <TableItemHead>CPF</TableItemHead>
-                <TableItemHead></TableItemHead>
-                <TableItemHead></TableItemHead>
+                <TableItemHead />
+                <TableItemHead />
               </tr>
             </thead>
             <tbody>
@@ -44,20 +46,32 @@ export default function ListRegisters() {
                   <TableItemBody>{registers[person].lastName}</TableItemBody>
                   <TableItemBody>{registers[person].email}</TableItemBody>
                   <TableItemBody>{registers[person].document}</TableItemBody>
+
                   <TableItemBody>
-                    <button className="text-green-700" onClick={handleClick}>
-                      <FaEye />
+                    <button
+                      className="text-red-700"
+                      onClick={() => deleteItem(registers[person])}
+                    >
+                      <FaTrashAlt />
                     </button>
                   </TableItemBody>
                   <TableItemBody>
-                    <button className="text-red-700" onClick={handleClick}>
-                      <FaTrashAlt />
+                    <button
+                      className="text-green-700"
+                      onClick={() => handleOpenModal(registers[person])}
+                    >
+                      <FaEye />
                     </button>
-                  </TableItemBody>{' '}
+                  </TableItemBody>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      ) : (
+        <div className="mt-5 text-xl font-medium text-gray-500 p-4 rounded-md flex items-center">
+          <FaExclamationCircle className="mr-2 text-yellow-500" />
+          Sem cadastros!
         </div>
       )}
     </div>

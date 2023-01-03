@@ -42,39 +42,7 @@ export default function RegisterForm() {
     street: '',
   });
 
-  // Mudar tudo isso, forma errada de fazer essas atribuições de valores.
-  const handleChangeName = (event) => {
-    setData({ ...data, name: event.target.value });
-  };
-  const handleChangeLastName = (event) => {
-    setData({ ...data, lastName: event.target.value });
-  };
-  const handleChangeDocument = (event) => {
-    setData({ ...data, document: event.target.value });
-  };
-  const handleChangeEmail = (event) => {
-    setData({ ...data, email: event.target.value });
-  };
-  const handleChangeBirthDate = (event) => {
-    setData({ ...data, birthDate: event.target.value });
-  };
-  const handleChangeAge = (event) => {
-    setData({ ...data, age: event.target.value });
-  };
-  const handleChangeCEP = (event) => {
-    setData({ ...data, cep: event.target.value });
-  };
-  const handleChangeCity = (event) => {
-    setData({ ...data, city: event.target.value });
-  };
-  const handleChangeDistrict = (event) => {
-    setData({ ...data, district: event.target.value });
-  };
-  const handleChangeStreet = (event) => {
-    setData({ ...data, street: event.target.value });
-  };
-
-  const onSubmit = (event) => {
+  const onSubmit = () => {
     const person = {};
     person[data.name] = data;
 
@@ -100,11 +68,17 @@ export default function RegisterForm() {
       >
         <h2 className="text-2xl text-blue-800 uppercase">Cadastrar:</h2>
         <FormSection>
-          <FormItem title="Nome" id="name" onChange={handleChangeName} />
+          <FormItem
+            title="Nome"
+            id="name"
+            onChange={(event) => setData({ ...data, name: event.target.value })}
+          />
           <FormItem
             title="Sobrenome"
             id="lastName"
-            onChange={handleChangeLastName}
+            onChange={(event) =>
+              setData({ ...data, lastName: event.target.value })
+            }
           />
         </FormSection>
 
@@ -112,10 +86,18 @@ export default function RegisterForm() {
           <FormItem
             title="CPF"
             id="document"
-            onChange={handleChangeDocument}
+            onChange={(event) =>
+              setData({ ...data, document: event.target.value })
+            }
             mask="999.999.999-99"
           />
-          <FormItem title="Email" id="email" onChange={handleChangeEmail} />
+          <FormItem
+            title="Email"
+            id="email"
+            onChange={(event) =>
+              setData({ ...data, email: event.target.value })
+            }
+          />
         </FormSection>
 
         <FormSection>
@@ -123,28 +105,46 @@ export default function RegisterForm() {
             title="Data de Nascimento"
             type="date"
             id="birthDate"
-            onChange={handleChangeBirthDate}
+            onChange={(event) =>
+              setData({ ...data, birthDate: event.target.value })
+            }
           />
-          <FormItem title="Idade" id="age" onChange={handleChangeAge} />
+          <FormItem
+            title="Idade"
+            id="age"
+            onChange={(event) => setData({ ...data, age: event.target.value })}
+          />
         </FormSection>
 
         <FormSection>
           <FormItem
             title="CEP"
             id="cep"
-            onChange={handleChangeCEP}
+            onChange={(event) => setData({ ...data, cep: event.target.value })}
             mask="99999-999"
           />
-          <FormItem title="Cidade" id="city" onChange={handleChangeCity} />
+          <FormItem
+            title="Cidade"
+            id="city"
+            onChange={(event) => setData({ ...data, city: event.target.value })}
+          />
         </FormSection>
 
         <FormSection>
           <FormItem
             title="Bairro"
             id="district"
-            onChange={handleChangeDistrict}
+            onChange={(event) =>
+              setData({ ...data, district: event.target.value })
+            }
           />
-          <FormItem title="Rua" id="street" onChange={handleChangeStreet} />
+          <FormItem
+            title="Rua"
+            id="street"
+            onChange={(event) =>
+              setData({ ...data, street: event.target.value })
+            }
+          />
         </FormSection>
 
         <Button

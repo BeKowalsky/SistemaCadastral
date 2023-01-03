@@ -1,5 +1,5 @@
 import moment from 'moment/moment';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaTimesCircle, FaTrashAlt } from 'react-icons/fa';
 
 const InformationSection = ({ titleOne, titleTwo, valueOne, valueTwo }) => {
@@ -15,16 +15,27 @@ const InformationSection = ({ titleOne, titleTwo, valueOne, valueTwo }) => {
   );
 };
 
-export default function PersonInformation({ person, deleteItem, setModal }) {
+export default function PersonInformation({
+  person,
+  deleteItem,
+  setModal,
+  setPerson,
+}) {
   const handleClick = (person) => {
     deleteItem(person);
     setModal((previousDefault) => !previousDefault);
   };
+
+  const closeModal = () => {
+    setModal((previousDefault) => !previousDefault);
+    setPerson({});
+  };
+
   return (
     <div className="text-gray-700 w-full">
       <button
         className="text-blue-700 w-full flex justify-end"
-        onClick={() => setModal((previousDefault) => !previousDefault)}
+        onClick={closeModal}
       >
         <FaTimesCircle className="text-xl" />
       </button>

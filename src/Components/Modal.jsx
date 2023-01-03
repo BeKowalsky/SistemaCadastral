@@ -1,7 +1,13 @@
 import React from 'react';
 import PersonInformation from '../PersonInformation';
 
-export default function Modal({ person, modal, deleteItem, setModal }) {
+export default function Modal({
+  person,
+  modal,
+  deleteItem,
+  setModal,
+  setPerson,
+}) {
   return (
     <div
       className={`${
@@ -13,6 +19,7 @@ export default function Modal({ person, modal, deleteItem, setModal }) {
           person={person}
           setModal={setModal}
           deleteItem={deleteItem}
+          setPerson={setPerson}
         />
       </div>
     </div>

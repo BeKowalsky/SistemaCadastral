@@ -38,6 +38,7 @@ function App() {
         modal={modal}
         deleteItem={deleteItem}
         setModal={setModal}
+        setPerson={setPerson}
       />
       <div className="App bg-blue-50 min-h-screen pb-10">
         <Header>Sistema Cadastral</Header>
@@ -55,13 +56,19 @@ function App() {
             Lista de Cadastros
           </Button>
         </div>
-        {section === 'register' && <RegisterForm />}
+        {section === 'register' && (
+          <RegisterForm
+            setSection={setSection}
+            setModal={setModal}
+            setPerson={setPerson}
+          />
+        )}
         {section === 'registrationList' && (
           <ListRegisters
             registers={registers}
-            setPerson={setPerson}
             setModal={setModal}
             deleteItem={deleteItem}
+            setPerson={setPerson}
           />
         )}
       </div>

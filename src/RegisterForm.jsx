@@ -39,7 +39,7 @@ const FormSection = ({ children }) => {
   return <div className="flex space-x-10">{children}</div>;
 };
 
-export default function RegisterForm() {
+export default function RegisterForm({ setSection, setPerson, setModal }) {
   const [data, setData] = useState({
     name: '',
     lastName: '',
@@ -68,14 +68,21 @@ export default function RegisterForm() {
       const newPerson = { ...registers, ...person };
       window.localStorage.setItem('Person', JSON.stringify(newPerson));
       localStorage.setItem('res', 'success');
+      localStorage.setItem('register', JSON.stringify(person[data.name]));
     }
   };
 
   React.useEffect(() => {
     const response = localStorage.getItem('res');
+    const registeredPerson = localStorage.getItem('register');
+    console.log(registeredPerson);
     if (response === 'success') {
       toast.success('Pessoa cadastrada com sucesso!');
       localStorage.removeItem('res');
+      setSection('registrationList');
+      setPerson(JSON.parse(registeredPerson));
+      localStorage.removeItem('register');
+      setModal((previousDefault) => !previousDefault);
     }
     setErro(false);
   }, []);

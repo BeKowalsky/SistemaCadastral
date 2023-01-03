@@ -1,3 +1,4 @@
+import moment from 'moment/moment';
 import React from 'react';
 import { FaTimesCircle, FaTrashAlt } from 'react-icons/fa';
 
@@ -27,7 +28,9 @@ export default function PersonInformation({ person, deleteItem, setModal }) {
       </div>
 
       <div className="flex mt-5 space-x-10">
-        <div className="w-1/2">Nascimento: {person.birthDate}</div>
+        <div className="w-1/2">
+          Nascimento: {moment(person.birthDate).format('L')}
+        </div>
         <div className="w-1/2">Idade: {person.age}</div>
       </div>
 

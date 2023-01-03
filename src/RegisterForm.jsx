@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import Button from './Components/Button';
+import InputMask from 'react-input-mask';
+import { isEmpty } from 'lodash';
 
-const FormItem = ({ title, type = 'text', id, onChange }) => {
+const FormItem = ({ title, type = 'text', id, onChange, mask }) => {
+  const InputComponent = isEmpty(mask) ? 'input' : InputMask;
+
   return (
     <div className="flex flex-col space-y-2 w-60">
       <label htmlFor={title} className="font-medium uppercase">
         {title}:
       </label>
-      <input
+      <InputComponent
         type={type}
         id={id}
         onChange={onChange}
+        mask={mask}
         className="border-blue-200 rounded-md focus:ring-0 focus:border-blue-500 bg-gray-50"
+        required
       />
     </div>
   );
@@ -103,7 +109,12 @@ export default function RegisterForm() {
         </FormSection>
 
         <FormSection>
-          <FormItem title="CPF" id="document" onChange={handleChangeDocument} />
+          <FormItem
+            title="CPF"
+            id="document"
+            onChange={handleChangeDocument}
+            mask="999.999.999-99"
+          />
           <FormItem title="Email" id="email" onChange={handleChangeEmail} />
         </FormSection>
 
@@ -118,7 +129,12 @@ export default function RegisterForm() {
         </FormSection>
 
         <FormSection>
-          <FormItem title="CEP" id="cep" onChange={handleChangeCEP} />
+          <FormItem
+            title="CEP"
+            id="cep"
+            onChange={handleChangeCEP}
+            mask="99999-999"
+          />
           <FormItem title="Cidade" id="city" onChange={handleChangeCity} />
         </FormSection>
 

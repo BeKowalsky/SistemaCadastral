@@ -3,8 +3,17 @@ import { toast } from 'react-toastify';
 import Button from './Components/Button';
 import InputMask from 'react-input-mask';
 import { isEmpty } from 'lodash';
+import { calcAge, isCpf } from './utils';
 
-const FormItem = ({ title, type = 'text', id, onChange, mask }) => {
+const FormItem = ({
+  title,
+  type = 'text',
+  id,
+  onChange,
+  onBlur,
+  mask,
+  value,
+}) => {
   const InputComponent = isEmpty(mask) ? 'input' : InputMask;
 
   return (
@@ -16,7 +25,9 @@ const FormItem = ({ title, type = 'text', id, onChange, mask }) => {
         type={type}
         id={id}
         onChange={onChange}
+        onBlur={onBlur}
         mask={mask}
+        value={value}
         className="border-blue-200 rounded-md focus:ring-0 focus:border-blue-500 bg-gray-50"
         required
       />
@@ -42,14 +53,22 @@ export default function RegisterForm() {
     street: '',
   });
 
-  const onSubmit = () => {
-    const person = {};
-    person[data.name] = data;
+  const [erro, setErro] = useState(false);
 
-    const registers = JSON.parse(window.localStorage.getItem('Person'));
-    const newPerson = { ...registers, ...person };
-    window.localStorage.setItem('Person', JSON.stringify(newPerson));
-    localStorage.setItem('res', 'success');
+  const onSubmit = (event) => {
+    if (!isCpf(data.document) || erro) {
+      event.preventDefault();
+      toast.error('Não foi possível concluir o cadastro!');
+      return;
+    } else {
+      const person = {};
+      person[data.name] = data;
+
+      const registers = JSON.parse(window.localStorage.getItem('Person'));
+      const newPerson = { ...registers, ...person };
+      window.localStorage.setItem('Person', JSON.stringify(newPerson));
+      localStorage.setItem('res', 'success');
+    }
   };
 
   React.useEffect(() => {
@@ -58,7 +77,42 @@ export default function RegisterForm() {
       toast.success('Pessoa cadastrada com sucesso!');
       localStorage.removeItem('res');
     }
+    setErro(false);
   }, []);
+
+  const handleChangeBirthDate = (birthDate) => {
+    const age = calcAge(birthDate);
+    setData({ ...data, birthDate, age });
+  };
+
+  const handleChangeCEP = (cep) => {
+    const CEP = cep.replace(/[^\d]+/g, '');
+    if (CEP.length < 1) {
+      return;
+    } else if (CEP.length < 8 && CEP.length > 0) {
+      toast.error('CEP inválido');
+      setErro(true);
+      return;
+    } else {
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.erro) {
+            toast.error('CEP inválido');
+            setErro(true);
+            return;
+          } else {
+            setData({
+              ...data,
+              city: json.localidade,
+              district: json.bairro,
+              street: json.logradouro,
+            });
+            setErro(false);
+          }
+        });
+    }
+  };
 
   return (
     <div className="mt-10">
@@ -71,11 +125,13 @@ export default function RegisterForm() {
           <FormItem
             title="Nome"
             id="name"
+            value={data.name}
             onChange={(event) => setData({ ...data, name: event.target.value })}
           />
           <FormItem
             title="Sobrenome"
             id="lastName"
+            value={data.lastName}
             onChange={(event) =>
               setData({ ...data, lastName: event.target.value })
             }
@@ -89,11 +145,18 @@ export default function RegisterForm() {
             onChange={(event) =>
               setData({ ...data, document: event.target.value })
             }
+            onBlur={(event) =>
+              !isCpf(event.target.value) &&
+              event.target.value.length > 0 &&
+              toast.error('CPF inválido!')
+            }
+            value={data.document}
             mask="999.999.999-99"
           />
           <FormItem
             title="Email"
             id="email"
+            value={data.email}
             onChange={(event) =>
               setData({ ...data, email: event.target.value })
             }
@@ -105,13 +168,13 @@ export default function RegisterForm() {
             title="Data de Nascimento"
             type="date"
             id="birthDate"
-            onChange={(event) =>
-              setData({ ...data, birthDate: event.target.value })
-            }
+            value={data.birthDate}
+            onChange={(event) => handleChangeBirthDate(event.target.value)}
           />
           <FormItem
             title="Idade"
             id="age"
+            value={data.age}
             onChange={(event) => setData({ ...data, age: event.target.value })}
           />
         </FormSection>
@@ -120,12 +183,15 @@ export default function RegisterForm() {
           <FormItem
             title="CEP"
             id="cep"
+            value={data.cep}
             onChange={(event) => setData({ ...data, cep: event.target.value })}
+            onBlur={(event) => handleChangeCEP(event.target.value)}
             mask="99999-999"
           />
           <FormItem
             title="Cidade"
             id="city"
+            value={data.city}
             onChange={(event) => setData({ ...data, city: event.target.value })}
           />
         </FormSection>
@@ -134,6 +200,7 @@ export default function RegisterForm() {
           <FormItem
             title="Bairro"
             id="district"
+            value={data.district}
             onChange={(event) =>
               setData({ ...data, district: event.target.value })
             }
@@ -141,6 +208,7 @@ export default function RegisterForm() {
           <FormItem
             title="Rua"
             id="street"
+            value={data.street}
             onChange={(event) =>
               setData({ ...data, street: event.target.value })
             }

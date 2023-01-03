@@ -1,5 +1,5 @@
 import moment from 'moment/moment';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FaTimesCircle, FaTrashAlt } from 'react-icons/fa';
 
 const InformationSection = ({ titleOne, titleTwo, valueOne, valueTwo }) => {

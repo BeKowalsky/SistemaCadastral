@@ -14,6 +14,19 @@ function App() {
 
   React.useEffect(() => {
     const registeredPeople = JSON.parse(window.localStorage.getItem('Person'));
+
+    const response = localStorage.getItem('res');
+    const registeredPerson = localStorage.getItem('register');
+    console.log(registeredPerson);
+    if (response === 'success') {
+      toast.success('Pessoa cadastrada com sucesso!');
+      localStorage.removeItem('res');
+      setSection('registrationList');
+      setPerson(JSON.parse(registeredPerson));
+      localStorage.removeItem('register');
+      setModal((previousDefault) => !previousDefault);
+    }
+
     if (registeredPeople !== null) setRegisters(registeredPeople);
   }, []);
 
@@ -61,6 +74,9 @@ function App() {
             setSection={setSection}
             setModal={setModal}
             setPerson={setPerson}
+            person={person}
+            modal={modal}
+            section={section}
           />
         )}
         {section === 'registrationList' && (

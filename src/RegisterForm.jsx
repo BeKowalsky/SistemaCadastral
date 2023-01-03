@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import Button from './Components/Button';
 
 const FormItem = ({ title, type = 'text', id, onChange }) => {
@@ -67,15 +68,23 @@ export default function RegisterForm() {
     setData({ ...data, street: event.target.value });
   };
 
-  const onSubmit = () => {
+  const onSubmit = (event) => {
     const person = {};
     person[data.name] = data;
 
     const registers = JSON.parse(window.localStorage.getItem('Person'));
     const newPerson = { ...registers, ...person };
-
     window.localStorage.setItem('Person', JSON.stringify(newPerson));
+    localStorage.setItem('res', 'success');
   };
+
+  React.useEffect(() => {
+    const response = localStorage.getItem('res');
+    if (response === 'success') {
+      toast.success('Pessoa cadastrada com sucesso!');
+      localStorage.removeItem('res');
+    }
+  }, []);
 
   return (
     <div className="mt-10">

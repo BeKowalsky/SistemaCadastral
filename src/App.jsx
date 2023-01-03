@@ -4,6 +4,7 @@ import Header from './Components/Header';
 import Modal from './Components/Modal';
 import ListRegisters from './ListRegisters';
 import RegisterForm from './RegisterForm';
+import { toast } from 'react-toastify';
 
 function App() {
   const [section, setSection] = useState('register');
@@ -27,6 +28,7 @@ function App() {
 
     window.localStorage.setItem('Person', JSON.stringify(registeredPeople));
     setRegisters(registeredPeople);
+    toast.success('Pessoa removida do cadastro com sucesso!');
   };
 
   return (

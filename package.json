@@ -2,6 +2,7 @@
   "name": "sistemacadastral",
   "version": "0.1.0",
   "private": true,
+  "homepage": "BeKowalsky.github.io/SistemaCadastral",
   "dependencies": {
     "@tailwindcss/forms": "^0.5.3",
     "@testing-library/jest-dom": "^5.16.5",
@@ -48,6 +49,5 @@
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4"
-  },
-  "homepage": "BeKowalsky.github.io/SistemaCadastral"
+  }
 }

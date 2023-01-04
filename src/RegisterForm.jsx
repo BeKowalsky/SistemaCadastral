@@ -4,6 +4,7 @@ import Button from './Components/Button';
 import InputMask from 'react-input-mask';
 import { isEmpty } from 'lodash';
 import { calcAge, isCpf } from './utils';
+import ToggleSwitchButton from './Components/ToggleSwitchButton';
 
 const FormItem = ({
   title,
@@ -40,12 +41,8 @@ const FormSection = ({ children }) => {
 };
 
 export default function RegisterForm({
-  setSection,
-  setPerson,
-  setModal,
-  person,
-  section,
-  modal,
+  registersInSequence,
+  setRegistersInSequence,
 }) {
   const [data, setData] = useState({
     name: '',
@@ -75,7 +72,12 @@ export default function RegisterForm({
       const newPerson = { ...registers, ...person };
       window.localStorage.setItem('Person', JSON.stringify(newPerson));
       localStorage.setItem('res', 'success');
-      localStorage.setItem('register', JSON.stringify(person[data.name]));
+      if (!registersInSequence) {
+        localStorage.setItem('register', JSON.stringify(person[data.name]));
+      }
+      if (registersInSequence) {
+        localStorage.setItem('inSequency', true);
+      }
     }
   };
 
@@ -119,6 +121,16 @@ export default function RegisterForm({
 
   return (
     <div className="mt-10">
+      <div className="flex justify-end w-full">
+        <div className="mr-40 absolute space-y-2">
+          <span className="text-gray-600 text-sm">Cadastros em Sequência:</span>
+          <ToggleSwitchButton
+            setActive={setRegistersInSequence}
+            active={registersInSequence}
+          />
+        </div>
+      </div>
+
       <form
         className="flex items-center flex-col space-y-10"
         onSubmit={onSubmit}

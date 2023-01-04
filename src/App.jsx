@@ -11,24 +11,34 @@ function App() {
   const [person, setPerson] = useState({});
   const [modal, setModal] = useState(false);
   const [registers, setRegisters] = useState();
+  const [registersInSequence, setRegistersInSequence] = useState(false);
+
+  console.log(registersInSequence);
+
+  const inSequency = localStorage.getItem('inSequency');
+  if (inSequency) {
+    setRegistersInSequence(true);
+    localStorage.removeItem('inSequency');
+  }
 
   React.useEffect(() => {
     const registeredPeople = JSON.parse(window.localStorage.getItem('Person'));
 
     const response = localStorage.getItem('res');
     const registeredPerson = localStorage.getItem('register');
-    console.log(registeredPerson);
     if (response === 'success') {
       toast.success('Pessoa cadastrada com sucesso!');
       localStorage.removeItem('res');
-      setSection('registrationList');
-      setPerson(JSON.parse(registeredPerson));
-      localStorage.removeItem('register');
-      setModal((previousDefault) => !previousDefault);
+      if (!registersInSequence) {
+        setSection('registrationList');
+        setPerson(JSON.parse(registeredPerson));
+        localStorage.removeItem('register');
+        setModal((previousDefault) => !previousDefault);
+      }
     }
 
     if (registeredPeople !== null) setRegisters(registeredPeople);
-  }, []);
+  }, [registersInSequence]);
 
   const deleteItem = (people) => {
     const registeredPeople = JSON.parse(window.localStorage.getItem('Person'));
@@ -71,12 +81,8 @@ function App() {
         </div>
         {section === 'register' && (
           <RegisterForm
-            setSection={setSection}
-            setModal={setModal}
-            setPerson={setPerson}
-            person={person}
-            modal={modal}
-            section={section}
+            registersInSequence={registersInSequence}
+            setRegistersInSequence={setRegistersInSequence}
           />
         )}
         {section === 'registrationList' && (

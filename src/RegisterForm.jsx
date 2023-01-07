@@ -257,12 +257,14 @@ export default function RegisterForm({
             <Button
               className="bg-blue-500 border-blue-400 rounded-md text-white hover:bg-blue-800"
               type="submit"
+              customBg
             >
               Finalizar Cadastro
             </Button>
             <Button
               className="bg-red-700 border-red-400 rounded-md text-white hover:bg-red-800"
               onClick={clearForm}
+              customBg
             >
               Limpar Campos
             </Button>

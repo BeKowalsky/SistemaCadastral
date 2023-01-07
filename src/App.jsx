@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
 import Button from './Components/Button';
 import Header from './Components/Header';
-import Modal from './Components/Modal';
 import ListRegisters from './ListRegisters';
 import RegisterForm from './RegisterForm';
 import { toast } from 'react-toastify';
+import ModalRegisteredPerson from './ModalRegisteredPerson';
 
 function App() {
   const [section, setSection] = useState('register');
   const [person, setPerson] = useState({});
-  const [modal, setModal] = useState(false);
+  const [modalRegisteredPerson, setModalRegisteredPerson] = useState(false);
   const [registers, setRegisters] = useState();
   const [registersInSequence, setRegistersInSequence] = useState(false);
+  const [isEditing, setEditing] = useState(false);
 
-  console.log(registersInSequence);
+  const [data, setData] = useState({
+    name: '',
+    lastName: '',
+    document: '',
+    email: '',
+    birthDate: '',
+    age: '',
+    cep: '',
+    city: '',
+    district: '',
+    street: '',
+  });
 
   const inSequency = localStorage.getItem('inSequency');
   if (inSequency) {
@@ -25,15 +37,11 @@ function App() {
     const registeredPeople = JSON.parse(window.localStorage.getItem('Person'));
 
     const response = localStorage.getItem('res');
-    const registeredPerson = localStorage.getItem('register');
     if (response === 'success') {
       toast.success('Pessoa cadastrada com sucesso!');
       localStorage.removeItem('res');
       if (!registersInSequence) {
         setSection('registrationList');
-        setPerson(JSON.parse(registeredPerson));
-        localStorage.removeItem('register');
-        setModal((previousDefault) => !previousDefault);
       }
     }
 
@@ -56,11 +64,11 @@ function App() {
 
   return (
     <>
-      <Modal
+      <ModalRegisteredPerson
         person={person}
-        modal={modal}
+        modal={modalRegisteredPerson}
         deleteItem={deleteItem}
-        setModal={setModal}
+        setModal={setModalRegisteredPerson}
         setPerson={setPerson}
       />
       <div className="App bg-blue-50 min-h-screen pb-10">
@@ -83,14 +91,20 @@ function App() {
           <RegisterForm
             registersInSequence={registersInSequence}
             setRegistersInSequence={setRegistersInSequence}
+            isEditing={isEditing}
+            data={data}
+            setData={setData}
           />
         )}
         {section === 'registrationList' && (
           <ListRegisters
             registers={registers}
-            setModal={setModal}
+            setModal={setModalRegisteredPerson}
             deleteItem={deleteItem}
             setPerson={setPerson}
+            setEditing={setEditing}
+            setData={setData}
+            setSection={setSection}
           />
         )}
       </div>

@@ -1,14 +1,24 @@
 import { isEmpty } from 'lodash';
 import React from 'react';
-import { FaExclamationCircle, FaEye, FaTrashAlt } from 'react-icons/fa';
+import { FaExclamationCircle, FaEye, FaPen, FaTrashAlt } from 'react-icons/fa';
 
-const TableItemHead = ({ children }) => {
-  return <th className="border border-gray-300 bg-gray-200 p-2">{children}</th>;
+const TableItemHead = ({ children, borderNone = false }) => {
+  return (
+    <th
+      className={`${
+        borderNone ? '' : 'border border-gray-300 bg-gray-200 rounded-md'
+      } p-2`}
+    >
+      {children}
+    </th>
+  );
 };
 
 const TableItemBody = ({ children }) => {
   return (
-    <td className="border border-gray-300 bg-gray-100 py-2 px-4">{children}</td>
+    <td className="border border-gray-300 bg-gray-100 py-2 px-4 rounded-md">
+      {children}
+    </td>
   );
 };
 
@@ -17,26 +27,36 @@ export default function ListRegisters({
   setPerson,
   setModal,
   deleteItem,
+  setEditing,
+  setData,
+  setSection,
 }) {
   const handleOpenModal = (people) => {
     setPerson(people);
     setModal((previousDefault) => !previousDefault);
   };
 
+  const startEdit = (person) => {
+    setEditing(true);
+    setData(person);
+    setSection('register');
+  };
+
   return (
     <div className="flex flex-col items-center mt-10">
       <h2 className="text-2xl text-blue-800 uppercase">Lista de Cadastros:</h2>
       {!isEmpty(registers) ? (
-        <div className="rounded-md overflow-hidden border border-gray-300 mt-5 ">
-          <table className="text-left">
+        <div className="overflow-hidden border-gray-300 mt-5 ">
+          <table className="text-left border-separate">
             <thead>
               <tr>
                 <TableItemHead>Nome</TableItemHead>
                 <TableItemHead>Sobrenome</TableItemHead>
                 <TableItemHead>Email</TableItemHead>
                 <TableItemHead>CPF</TableItemHead>
-                <TableItemHead />
-                <TableItemHead />
+                <TableItemHead borderNone />
+                <TableItemHead borderNone />
+                <TableItemHead borderNone />
               </tr>
             </thead>
             <tbody>
@@ -53,6 +73,14 @@ export default function ListRegisters({
                       onClick={() => deleteItem(registers[person])}
                     >
                       <FaTrashAlt />
+                    </button>
+                  </TableItemBody>
+                  <TableItemBody>
+                    <button
+                      className="text-blue-700"
+                      onClick={() => startEdit(registers[person])}
+                    >
+                      <FaPen />
                     </button>
                   </TableItemBody>
                   <TableItemBody>

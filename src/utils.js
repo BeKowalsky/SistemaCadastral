@@ -1,4 +1,5 @@
 import { forEach } from 'lodash';
+import { toast } from 'react-toastify';
 
 export const asInt = (value) => parseInt(value, 10);
 
@@ -69,3 +70,28 @@ export function isCpf(str) {
 
   return true;
 }
+
+export const validDocument = (value) => {
+  const registers = Object.keys(
+    JSON.parse(window.localStorage.getItem('Person')),
+  );
+
+  const alreadyExists = !!registers.find((element) => element === value);
+
+  if (!isCpf(value) && value.length > 0) {
+    toast.error('CPF inválido!');
+    return false;
+  } else if (alreadyExists) {
+    toast.error('CPF já cadastrado!');
+    return false;
+  }
+  return true;
+};
+
+export const validDate = (value) => {
+  if (Number.isNaN(value)) {
+    return false;
+  }
+
+  return true;
+};

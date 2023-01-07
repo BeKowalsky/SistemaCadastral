@@ -205,6 +205,7 @@ export default function RegisterForm({
               <FormItem
                 title="Idade"
                 id="age"
+                type="number"
                 value={data.age}
                 onChange={(event) =>
                   setData({ ...data, age: event.target.value })

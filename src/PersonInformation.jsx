@@ -1,6 +1,6 @@
 import moment from 'moment/moment';
 import React from 'react';
-import { FaTimesCircle, FaTrashAlt } from 'react-icons/fa';
+import { FaPen, FaTimesCircle, FaTrashAlt } from 'react-icons/fa';
 
 const InformationSection = ({ titleOne, titleTwo, valueOne, valueTwo }) => {
   return (
@@ -20,6 +20,7 @@ export default function PersonInformation({
   deleteItem,
   setModal,
   setPerson,
+  startEdit,
 }) {
   const handleClick = (person) => {
     deleteItem(person);
@@ -75,12 +76,18 @@ export default function PersonInformation({
         valueTwo={person.street}
       />
 
-      <div className="mt-10">
+      <div className="mt-10 flex space-x-4">
         <button
           className="text-red-700 border border-red-700 flex items-center py-2 px-6 rounded-md"
           onClick={() => handleClick(person)}
         >
           <FaTrashAlt className="mr-2" /> Deletar
+        </button>
+        <button
+          className="text-blue-700 border border-blue-700 flex items-center py-2 px-6 rounded-md"
+          onClick={() => startEdit(person)}
+        >
+          <FaPen className="mr-2" /> Editar
         </button>
       </div>
     </div>

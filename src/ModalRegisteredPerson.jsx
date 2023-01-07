@@ -8,6 +8,7 @@ export default function ModalRegisteredPerson({
   deleteItem,
   setModal,
   setPerson,
+  startEdit,
 }) {
   return (
     <Modal modal={modal}>
@@ -17,6 +18,7 @@ export default function ModalRegisteredPerson({
           setModal={setModal}
           deleteItem={deleteItem}
           setPerson={setPerson}
+          startEdit={startEdit}
         />
       </div>
     </Modal>

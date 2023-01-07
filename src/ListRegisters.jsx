@@ -14,9 +14,14 @@ const TableItemHead = ({ children, borderNone = false }) => {
   );
 };
 
-const TableItemBody = ({ children }) => {
+const TableItemBody = ({ children, clickable = false, onClick }) => {
   return (
-    <td className="border border-gray-300 bg-gray-100 py-2 px-4 rounded-md">
+    <td
+      className={`border border-gray-300 bg-gray-100 py-2 px-4 rounded-md ${
+        clickable ? 'hover:bg-gray-200 cursor-pointer' : ''
+      }`}
+      onClick={onClick}
+    >
       {children}
     </td>
   );
@@ -27,19 +32,11 @@ export default function ListRegisters({
   setPerson,
   setModal,
   deleteItem,
-  setEditing,
-  setData,
-  setSection,
+  startEdit,
 }) {
   const handleOpenModal = (people) => {
     setPerson(people);
     setModal((previousDefault) => !previousDefault);
-  };
-
-  const startEdit = (person) => {
-    setEditing(true);
-    setData(person);
-    setSection('register');
   };
 
   return (
@@ -67,27 +64,27 @@ export default function ListRegisters({
                   <TableItemBody>{registers[person].email}</TableItemBody>
                   <TableItemBody>{registers[person].document}</TableItemBody>
 
-                  <TableItemBody>
-                    <button
-                      className="text-red-700"
-                      onClick={() => deleteItem(registers[person])}
-                    >
+                  <TableItemBody
+                    clickable
+                    onClick={() => deleteItem(registers[person])}
+                  >
+                    <button className="text-red-700 flex items-center">
                       <FaTrashAlt />
                     </button>
                   </TableItemBody>
-                  <TableItemBody>
-                    <button
-                      className="text-blue-700"
-                      onClick={() => startEdit(registers[person])}
-                    >
+                  <TableItemBody
+                    clickable
+                    onClick={() => startEdit(registers[person])}
+                  >
+                    <button className="text-blue-700 flex items-center">
                       <FaPen />
                     </button>
                   </TableItemBody>
-                  <TableItemBody>
-                    <button
-                      className="text-green-700"
-                      onClick={() => handleOpenModal(registers[person])}
-                    >
+                  <TableItemBody
+                    clickable
+                    onClick={() => handleOpenModal(registers[person])}
+                  >
+                    <button className="text-green-700 flex items-center">
                       <FaEye />
                     </button>
                   </TableItemBody>

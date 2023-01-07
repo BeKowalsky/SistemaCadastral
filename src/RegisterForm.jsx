@@ -51,6 +51,8 @@ export default function RegisterForm({
   isEditing,
   data,
   setData,
+  initialState,
+  setEditing,
 }) {
   const [erro, setErro] = useState(false);
   const { request, value, error } = useFetch();
@@ -128,9 +130,14 @@ export default function RegisterForm({
     }
   };
 
+  const clearForm = () => {
+    setData(initialState);
+    setEditing(false);
+  };
+
   return (
-    <div className="mt-10">
-      <div className="flex justify-end w-full">
+    <>
+      <div className="flex justify-end w-full mt-10">
         <div className="mr-40 absolute space-y-2">
           <span className="text-gray-600 text-sm">Cadastros em Sequência:</span>
           <ToggleSwitchButton
@@ -139,113 +146,129 @@ export default function RegisterForm({
           />
         </div>
       </div>
+      <div className=" w-full flex justify-center flex-row">
+        <form className="flex flex-col space-y-10" onSubmit={onSubmit}>
+          <div className="flex items-center flex-col space-y-10">
+            <h2 className="text-2xl text-blue-800 uppercase">Cadastrar:</h2>
+            <FormSection>
+              <FormItem
+                title="Nome"
+                id="name"
+                value={data.name}
+                onChange={(event) =>
+                  setData({ ...data, name: event.target.value })
+                }
+              />
+              <FormItem
+                title="Sobrenome"
+                id="lastName"
+                value={data.lastName}
+                onChange={(event) =>
+                  setData({ ...data, lastName: event.target.value })
+                }
+              />
+            </FormSection>
 
-      <form
-        className="flex items-center flex-col space-y-10"
-        onSubmit={onSubmit}
-      >
-        <h2 className="text-2xl text-blue-800 uppercase">Cadastrar:</h2>
-        <FormSection>
-          <FormItem
-            title="Nome"
-            id="name"
-            value={data.name}
-            onChange={(event) => setData({ ...data, name: event.target.value })}
-          />
-          <FormItem
-            title="Sobrenome"
-            id="lastName"
-            value={data.lastName}
-            onChange={(event) =>
-              setData({ ...data, lastName: event.target.value })
-            }
-          />
-        </FormSection>
+            <FormSection>
+              <FormItem
+                title="CPF"
+                id="document"
+                onChange={(event) =>
+                  setData({ ...data, document: event.target.value })
+                }
+                onBlur={handleValidation}
+                value={data.document}
+                mask="999.999.999-99"
+                disabled={isEditing}
+              />
+              <FormItem
+                title="Email"
+                id="email"
+                value={data.email}
+                onChange={(event) =>
+                  setData({ ...data, email: event.target.value })
+                }
+              />
+            </FormSection>
 
-        <FormSection>
-          <FormItem
-            title="CPF"
-            id="document"
-            onChange={(event) =>
-              setData({ ...data, document: event.target.value })
-            }
-            onBlur={handleValidation}
-            value={data.document}
-            mask="999.999.999-99"
-            disabled={isEditing}
-          />
-          <FormItem
-            title="Email"
-            id="email"
-            value={data.email}
-            onChange={(event) =>
-              setData({ ...data, email: event.target.value })
-            }
-          />
-        </FormSection>
+            <FormSection>
+              <FormItem
+                title="Data de Nascimento"
+                type="date"
+                id="birthDate"
+                value={data.birthDate}
+                onChange={(event) =>
+                  setData({ ...data, birthDate: event.target.value })
+                }
+                onBlur={handleChangeBirthDate}
+              />
+              <FormItem
+                title="Idade"
+                id="age"
+                value={data.age}
+                onChange={(event) =>
+                  setData({ ...data, age: event.target.value })
+                }
+              />
+            </FormSection>
 
-        <FormSection>
-          <FormItem
-            title="Data de Nascimento"
-            type="date"
-            id="birthDate"
-            value={data.birthDate}
-            onChange={(event) =>
-              setData({ ...data, birthDate: event.target.value })
-            }
-            onBlur={handleChangeBirthDate}
-          />
-          <FormItem
-            title="Idade"
-            id="age"
-            value={data.age}
-            onChange={(event) => setData({ ...data, age: event.target.value })}
-          />
-        </FormSection>
+            <FormSection>
+              <FormItem
+                title="CEP"
+                id="cep"
+                value={data.cep}
+                onChange={(event) =>
+                  setData({ ...data, cep: event.target.value })
+                }
+                onBlur={(event) => handleChangeCEP(event.target.value)}
+                mask="99999-999"
+              />
+              <FormItem
+                title="Cidade"
+                id="city"
+                value={data.city}
+                onChange={(event) =>
+                  setData({ ...data, city: event.target.value })
+                }
+              />
+            </FormSection>
 
-        <FormSection>
-          <FormItem
-            title="CEP"
-            id="cep"
-            value={data.cep}
-            onChange={(event) => setData({ ...data, cep: event.target.value })}
-            onBlur={(event) => handleChangeCEP(event.target.value)}
-            mask="99999-999"
-          />
-          <FormItem
-            title="Cidade"
-            id="city"
-            value={data.city}
-            onChange={(event) => setData({ ...data, city: event.target.value })}
-          />
-        </FormSection>
+            <FormSection>
+              <FormItem
+                title="Bairro"
+                id="district"
+                value={data.district}
+                onChange={(event) =>
+                  setData({ ...data, district: event.target.value })
+                }
+              />
+              <FormItem
+                title="Rua"
+                id="street"
+                value={data.street}
+                onChange={(event) =>
+                  setData({ ...data, street: event.target.value })
+                }
+              />
+            </FormSection>
+          </div>
 
-        <FormSection>
-          <FormItem
-            title="Bairro"
-            id="district"
-            value={data.district}
-            onChange={(event) =>
-              setData({ ...data, district: event.target.value })
-            }
-          />
-          <FormItem
-            title="Rua"
-            id="street"
-            value={data.street}
-            onChange={(event) =>
-              setData({ ...data, street: event.target.value })
-            }
-          />
-        </FormSection>
-
-        <Button
-          className="bg-blue-500 border-blue-400 rounded-md text-white hover:bg-blue-700"
-          type="submit"
-        >
-          Finalizar Cadastro
-        </Button>
-      </form>
-    </div>
+          <div className="space-x-5">
+            <Button
+              className="bg-blue-500 border-blue-400 rounded-md text-white hover:bg-blue-800"
+              type="submit"
+            >
+              Finalizar Cadastro
+            </Button>
+            <Button
+              className="bg-red-700 border-red-400 rounded-md text-white hover:bg-red-800"
+              onClick={clearForm}
+            >
+              Limpar Campos
+            </Button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }

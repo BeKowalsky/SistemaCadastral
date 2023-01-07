@@ -14,7 +14,7 @@ function App() {
   const [registersInSequence, setRegistersInSequence] = useState(false);
   const [isEditing, setEditing] = useState(false);
 
-  const [data, setData] = useState({
+  const initialState = {
     name: '',
     lastName: '',
     document: '',
@@ -25,7 +25,11 @@ function App() {
     city: '',
     district: '',
     street: '',
-  });
+  };
+
+  const [data, setData] = useState(initialState);
+
+  console.log(data, isEditing);
 
   const inSequency = localStorage.getItem('inSequency');
   if (inSequency) {
@@ -62,6 +66,13 @@ function App() {
     toast.success('Pessoa removida do cadastro com sucesso!');
   };
 
+  const startEdit = (person) => {
+    setEditing(true);
+    setData(person);
+    setSection('register');
+    if (modalRegisteredPerson) setModalRegisteredPerson(false);
+  };
+
   return (
     <>
       <ModalRegisteredPerson
@@ -70,6 +81,7 @@ function App() {
         deleteItem={deleteItem}
         setModal={setModalRegisteredPerson}
         setPerson={setPerson}
+        startEdit={startEdit}
       />
       <div className="App bg-blue-50 min-h-screen pb-10">
         <Header>Sistema Cadastral</Header>
@@ -94,6 +106,8 @@ function App() {
             isEditing={isEditing}
             data={data}
             setData={setData}
+            initialState={initialState}
+            setEditing={setEditing}
           />
         )}
         {section === 'registrationList' && (
@@ -102,9 +116,7 @@ function App() {
             setModal={setModalRegisteredPerson}
             deleteItem={deleteItem}
             setPerson={setPerson}
-            setEditing={setEditing}
-            setData={setData}
-            setSection={setSection}
+            startEdit={startEdit}
           />
         )}
       </div>

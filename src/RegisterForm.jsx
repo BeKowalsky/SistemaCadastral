@@ -149,7 +149,7 @@ export default function RegisterForm({
       <div className=" w-full flex justify-center flex-row">
         <form className="flex flex-col space-y-10" onSubmit={onSubmit}>
           <div className="flex items-center flex-col space-y-10">
-            <h2 className="text-2xl text-blue-800 uppercase">Cadastrar:</h2>
+            <h2 className="text-2xl text-blue-800 uppercase">Cadastrar</h2>
             <FormSection>
               <FormItem
                 title="Nome"

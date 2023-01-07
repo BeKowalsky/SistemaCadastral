@@ -41,7 +41,7 @@ export default function ListRegisters({
 
   return (
     <div className="flex flex-col items-center mt-10">
-      <h2 className="text-2xl text-blue-800 uppercase">Lista de Cadastros:</h2>
+      <h2 className="text-2xl text-blue-800 uppercase">Lista de Cadastros</h2>
       {!isEmpty(registers) ? (
         <div className="overflow-hidden border-gray-300 mt-5 ">
           <table className="text-left border-separate">

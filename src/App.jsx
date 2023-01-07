@@ -29,8 +29,6 @@ function App() {
 
   const [data, setData] = useState(initialState);
 
-  console.log(data, isEditing);
-
   const inSequency = localStorage.getItem('inSequency');
   if (inSequency) {
     setRegistersInSequence(true);

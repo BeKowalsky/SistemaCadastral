@@ -4,11 +4,11 @@ import { FaPen, FaTimesCircle, FaTrashAlt } from 'react-icons/fa';
 
 const InformationSection = ({ titleOne, titleTwo, valueOne, valueTwo }) => {
   return (
-    <div className="flex mt-5 md:space-x-10 flex-col md:flex-row md:space-y-0 space-y-5">
-      <div className="md:w-1/2">
+    <div className="flex mt-5 sm:space-x-10 flex-col sm:flex-row sm:space-y-0 space-y-5">
+      <div className="sm:w-1/2">
         {titleOne}: {valueOne}
       </div>
-      <div className="md:w-1/2">
+      <div className="sm:w-1/2">
         {titleTwo}: {valueTwo}
       </div>
     </div>

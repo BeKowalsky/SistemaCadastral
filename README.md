@@ -19,6 +19,7 @@
 - Dados guardados no localStorage
 - CRUD
 - Hooks para servir o CRUD
+- A chave de armazenamento do cadastro é o CPF, fazendo com que seja uma chave única
 
 ## Instalação
 

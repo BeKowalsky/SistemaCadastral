@@ -81,7 +81,7 @@ function App() {
         setPerson={setPerson}
         startEdit={startEdit}
       />
-      <div className="App bg-blue-50 min-h-screen lg:pb-10">
+      <div className="App bg-blue-50 min-h-screen pb-10">
         <Header>Sistema Cadastral</Header>
         <div className="flex justify-start text-lg bg-blue-200  divide-x divide-blue-700 border border-y border-blue-700 text-blue-800">
           <Button

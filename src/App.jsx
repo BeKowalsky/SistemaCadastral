@@ -43,7 +43,7 @@ function App() {
       if (response === 'success') {
         toast.success('Pessoa cadastrada com sucesso!');
       } else {
-        toast.success('Pessoa cadastrada com sucesso!');
+        toast.success('Cadastro editado com sucesso!');
       }
 
       localStorage.removeItem('res');

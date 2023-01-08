@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Button from './Components/Button';
 import Header from './Components/Header';
-import ListRegisters from './ListRegisters';
-import RegisterForm from './RegisterForm';
+import ListRegisters from './Layouts/ListRegisters';
+import RegisterForm from './Layouts/RegisterForm';
 import { toast } from 'react-toastify';
-import ModalRegisteredPerson from './ModalRegisteredPerson';
+import ModalRegisteredPerson from './Layouts/ModalRegisteredPerson';
 
 function App() {
   const [section, setSection] = useState('register');

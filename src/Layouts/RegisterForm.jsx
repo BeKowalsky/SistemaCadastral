@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import Button from './Components/Button';
+import Button from '../Components/Button';
 import InputMask from 'react-input-mask';
 import { isEmpty } from 'lodash';
-import { calcAge, validDate, validDocument } from './utils';
-import ToggleSwitchButton from './Components/ToggleSwitchButton';
-import { useFetch } from './hooks';
+import { calcAge, validDate, validDocument } from '../utils';
+import ToggleSwitchButton from '../Components/ToggleSwitchButton';
+import { useFetch } from '../hooks';
 
 const FormItem = ({
   title,
@@ -42,7 +42,11 @@ const FormItem = ({
 };
 
 const FormSection = ({ children }) => {
-  return <div className="flex space-x-10">{children}</div>;
+  return (
+    <div className="flex md:space-x-10 md:space-y-0 flex-col md:flex-row space-y-10">
+      {children}
+    </div>
+  );
 };
 
 export default function RegisterForm({
@@ -137,8 +141,8 @@ export default function RegisterForm({
 
   return (
     <>
-      <div className="flex justify-end w-full mt-10">
-        <div className="mr-40 absolute space-y-2">
+      <div className="justify-end w-full mt-10 hidden md:flex">
+        <div className="xl:mr-40 md:mr-10 xl:absolute space-y-2">
           <span className="text-gray-600 text-sm">Cadastros em Sequência:</span>
           <ToggleSwitchButton
             setActive={setRegistersInSequence}
@@ -146,7 +150,7 @@ export default function RegisterForm({
           />
         </div>
       </div>
-      <div className=" w-full flex justify-center flex-row">
+      <div className="w-full flex justify-center flex-row mt-8 md:mt-5 xl:mt-0">
         <form className="flex flex-col space-y-10" onSubmit={onSubmit}>
           <div className="flex items-center flex-col space-y-10">
             <h2 className="text-2xl text-blue-800 uppercase">Cadastrar</h2>
@@ -254,18 +258,16 @@ export default function RegisterForm({
             </FormSection>
           </div>
 
-          <div className="space-x-5">
+          <div className="md:space-x-5 flex flex-col space-y-5 md:space-y-0 md:flex-row">
             <Button
               className="bg-blue-500 border-blue-400 rounded-md text-white hover:bg-blue-800"
               type="submit"
-              customBg
             >
               Finalizar Cadastro
             </Button>
             <Button
               className="bg-red-700 border-red-400 rounded-md text-white hover:bg-red-800"
               onClick={clearForm}
-              customBg
             >
               Limpar Campos
             </Button>

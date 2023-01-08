@@ -73,7 +73,12 @@ export default function RegisterForm({
       const registers = JSON.parse(window.localStorage.getItem('Person'));
       const newPerson = { ...registers, ...person };
       window.localStorage.setItem('Person', JSON.stringify(newPerson));
-      localStorage.setItem('res', 'success');
+      if (isEditing) {
+        localStorage.setItem('res', 'successEdited');
+      } else {
+        localStorage.setItem('res', 'success');
+      }
+
       if (registersInSequence) {
         localStorage.setItem('inSequency', true);
       }

@@ -39,8 +39,13 @@ function App() {
     const registeredPeople = JSON.parse(window.localStorage.getItem('Person'));
 
     const response = localStorage.getItem('res');
-    if (response === 'success') {
-      toast.success('Pessoa cadastrada com sucesso!');
+    if (response === 'success' || response === 'successEdited') {
+      if (response === 'success') {
+        toast.success('Pessoa cadastrada com sucesso!');
+      } else {
+        toast.success('Pessoa cadastrada com sucesso!');
+      }
+
       localStorage.removeItem('res');
       if (!registersInSequence) {
         setSection('registrationList');

@@ -17,6 +17,7 @@ const FormItem = ({
   value,
   disabled,
 }) => {
+  console.log(value);
   const InputComponent = isEmpty(mask) ? 'input' : InputMask;
   return (
     <div className="flex flex-col space-y-2 w-60">
@@ -33,9 +34,9 @@ const FormItem = ({
           value={
             isUndefined(value)
               ? ''
-              : id === 'age' && value >= 1
-              ? value
-              : value.age?.toString().replace('0.', '')
+              : id === 'age'
+              ? value.age?.toString().replace('0.', '')
+              : value
           }
           className={`border-blue-200 rounded-md focus:ring-0 focus:border-blue-500 bg-gray-50 ${
             disabled ? 'opacity-50 cursor-not-allowed' : ''

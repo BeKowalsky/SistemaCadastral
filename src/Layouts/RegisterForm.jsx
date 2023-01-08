@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import Button from '../Components/Button';
 import InputMask from 'react-input-mask';
-import { isEmpty } from 'lodash';
+import { isEmpty, isUndefined } from 'lodash';
 import { calcAge, validDate, validDocument } from '../utils';
 import ToggleSwitchButton from '../Components/ToggleSwitchButton';
 import { useFetch } from '../hooks';
@@ -18,7 +18,6 @@ const FormItem = ({
   disabled,
 }) => {
   const InputComponent = isEmpty(mask) ? 'input' : InputMask;
-
   return (
     <div className="flex flex-col space-y-2 w-60">
       <label htmlFor={title} className="font-medium uppercase">
@@ -31,7 +30,13 @@ const FormItem = ({
           onChange={onChange}
           onBlur={onBlur}
           mask={mask}
-          value={value}
+          value={
+            isUndefined(value)
+              ? ''
+              : id === 'age' && value >= 1
+              ? value
+              : value.age?.toString().replace('0.', '')
+          }
           className={`border-blue-200 rounded-md focus:ring-0 focus:border-blue-500 bg-gray-50 ${
             disabled ? 'opacity-50 cursor-not-allowed' : ''
           } w-60`}
@@ -43,7 +48,11 @@ const FormItem = ({
             id === 'age' ? 'absolute' : 'hidden'
           }`}
         >
-          Anos
+          {value.lifeTime === 'Days'
+            ? 'Dias'
+            : value.lifeTime === 'Months'
+            ? 'Meses'
+            : 'Anos'}
         </p>
       </div>
     </div>
@@ -119,9 +128,9 @@ export default function RegisterForm({
   }, [value, error, setData]);
 
   const handleChangeBirthDate = ({ target }) => {
-    const age = calcAge(target.value);
+    const { age, lifeTime } = calcAge(target.value);
     if (validDate(age)) {
-      setData({ ...data, age });
+      setData({ ...data, age: { age, lifeTime } });
       setErro({ ...erro, birthday: false });
     } else {
       toast.error('Data de aniversário inválida');

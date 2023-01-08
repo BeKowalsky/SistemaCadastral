@@ -20,7 +20,7 @@ function App() {
     document: '',
     email: '',
     birthDate: '',
-    age: '',
+    age: { age: '', lifeTime: '' },
     cep: '',
     city: '',
     district: '',

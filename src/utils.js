@@ -1,4 +1,5 @@
 import { forEach } from 'lodash';
+import moment from 'moment/moment';
 import { toast } from 'react-toastify';
 
 export const asInt = (value) => parseInt(value, 10);
@@ -12,19 +13,28 @@ export function onlyDigits(str) {
 }
 
 export function calcAge(birthDate) {
-  const today = new Date();
   const birthday = new Date(birthDate);
-  let age = today.getFullYear() - birthday.getFullYear();
 
-  if (
-    today.getMonth() + 1 < birthday.getMonth() + 1 ||
-    (today.getMonth() === birthday.getMonth() &&
-      today.getDate() < birthday.getDate())
-  ) {
-    age = age - 1;
+  const now = moment(new Date());
+
+  const duration = moment.duration(now.diff(birthday));
+
+  let age;
+  let lifeTime;
+
+  if (birthday > now) {
+    age = -1;
+  } else if (duration.asMonths() < 1) {
+    age = parseFloat('0.' + duration.asDays());
+    lifeTime = 'Days';
+  } else if (duration.asYears() < 1) {
+    age = parseFloat('0.' + duration.asMonths());
+    lifeTime = 'Months';
+  } else {
+    age = parseInt(duration.asYears());
   }
 
-  return age;
+  return { age, lifeTime };
 }
 
 export function isCpf(str) {
@@ -89,6 +99,7 @@ export const validDocument = (value) => {
 };
 
 export const validDate = (value) => {
+  value.toString().replace(/\D/g, '');
   if (Number.isNaN(value)) {
     return false;
   } else if (value < 0) {

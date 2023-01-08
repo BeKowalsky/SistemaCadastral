@@ -1,5 +1,5 @@
 <h1 align="center">Sistema de Cadastro</h1>
-<p>Um projeto desenvolvido visando <strong>aperfeiçoar</strong> conceitos relacionados ao Front-End. <strong>Desenvolvido</strong> com <br> ReactJS e TailwindCSS</p>
+<p>Um projeto desenvolvido visando <strong>aperfeiçoar</strong> conceitos relacionados ao Front-End. <strong>Desenvolvido</strong> com <br> ReactJS, TailwindCSS, Momentjs e React Toastify</p>
 
 <p align="center">
 <a href="https://wakatime.com/badge/user/f4477923-b01d-4bb6-8f7f-8dcd72a154e8/project/d8f34661-66d1-42a7-8104-5408424a5c17"><img src="https://wakatime.com/badge/user/f4477923-b01d-4bb6-8f7f-8dcd72a154e8/project/d8f34661-66d1-42a7-8104-5408424a5c17.svg" alt="wakatime"></a>
@@ -25,6 +25,8 @@
 - **Tecnologias**
   - ReactJS
   - TailwindCSS
+  - Momentjs
+  - React Toastify
 
 ## Instalação
 

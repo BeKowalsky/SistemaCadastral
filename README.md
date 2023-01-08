@@ -1,5 +1,5 @@
 <h1 align="center">Sistema de Cadastro</h1>
-<p>Um projeto desenvolvido visando <strong>aperfeiçoar</strong> conceitos relacionados ao Front-End. <strong>Desenvolvido</strong> com <br> ReactJS e Tailwind</p>
+<p>Um projeto desenvolvido visando <strong>aperfeiçoar</strong> conceitos relacionados ao Front-End. <strong>Desenvolvido</strong> com <br> ReactJS e TailwindCSS</p>
 
 <p align="center">
 <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/BeKowalsky/SistemaCadastral">
@@ -16,10 +16,14 @@
 </p>
 
 ## Funcionalidades
-- Dados guardados no localStorage
-- CRUD
-- Hooks para servir o CRUD
-- A chave de armazenamento do cadastro é o CPF, fazendo com que seja uma chave única
+- **Destaca-se**
+  - Dados guardados no localStorage
+  - CRUD
+  - Hooks para servir o CRUD
+  - A chave de armazenamento do cadastro é o CPF, fazendo com que seja uma chave única
+- **Tecnologias**
+  - ReactJS
+  - TailwindCSS
 
 ## Instalação
 

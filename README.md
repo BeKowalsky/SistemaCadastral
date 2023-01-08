@@ -53,7 +53,17 @@ npm start
 
 A aplicação está hospedada na plataforma da [Netlify](https://www.netlify.com/), clique [aqui](https://sistemacadastral.netlify.app) para acessar.
 
+## Contato
+
+Qualquer dúvida ou feedback estarei disponível em qualquer uma das redes sociais abaixo:
+
+<div align="center">
+  <a href="https://www.linkedin.com/in/bekowa/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+  <a href = "mailto:kwybernardo@gmail.com"><img src="https://img.shields.io/badge/gmail-D14836?&style=for-the-badge&logo=gmail&logoColor=white&" target="_blank"></a>
+</div>
+
 ## Previews
+
 <p align="center">
   <h3>Tela de cadastro</h3>
   <a href="#nike-store">
@@ -80,12 +90,3 @@ A aplicação está hospedada na plataforma da [Netlify](https://www.netlify.com
     <img alt="preview" src="./public/img/PreviewCinco.JPG" >
   </a>
 </p>
-
-## Contato
-
-Qualquer dúvida ou feedback estarei disponível em qualquer uma das redes sociais abaixo:
-
-<div align="center">
-  <a href="https://www.linkedin.com/in/bekowa/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
-  <a href = "mailto:kwybernardo@gmail.com"><img src="https://img.shields.io/badge/gmail-D14836?&style=for-the-badge&logo=gmail&logoColor=white&" target="_blank"></a>
-</div>

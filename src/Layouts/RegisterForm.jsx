@@ -67,11 +67,11 @@ export default function RegisterForm({
   initialState,
   setEditing,
 }) {
-  const [erro, setErro] = useState(false);
+  const [erro, setErro] = useState({});
   const { request, value, error } = useFetch();
 
   const onSubmit = (event) => {
-    if (error || erro) {
+    if (error || erro.document || erro.cep || erro.birthday) {
       event.preventDefault();
       toast.error('Não foi possível efetuar o cadastro!');
       return;
@@ -95,7 +95,7 @@ export default function RegisterForm({
   };
 
   React.useEffect(() => {
-    setErro(false);
+    setErro({});
   }, []);
 
   React.useEffect(() => {
@@ -122,10 +122,10 @@ export default function RegisterForm({
     const age = calcAge(target.value);
     if (validDate(age)) {
       setData({ ...data, age });
-      setErro(false);
+      setErro({ ...erro, birthday: false });
     } else {
       toast.error('Data de aniversário inválida');
-      setErro(true);
+      setErro({ ...erro, birthday: true });
     }
   };
 
@@ -135,9 +135,10 @@ export default function RegisterForm({
       return;
     } else if (CEP.length < 8 && CEP.length > 0) {
       toast.error('CEP inválido');
-      setErro(true);
+      setErro({ ...erro, cep: true });
       return;
     } else {
+      setErro({ ...erro, cep: false });
       request(`https://viacep.com.br/ws/${cep}/json/`);
     }
   };
@@ -145,9 +146,9 @@ export default function RegisterForm({
   const handleValidation = ({ target }) => {
     if (!isEditing) {
       if (!validDocument(target.value)) {
-        setErro(true);
+        setErro({ ...erro, document: true });
       } else {
-        setErro(false);
+        setErro({ ...erro, document: false });
       }
     }
   };

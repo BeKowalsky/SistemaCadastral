@@ -48,34 +48,6 @@ npm start
 
 A aplicação está hospedada na plataforma da [Netlify](https://www.netlify.com/), clique [aqui](https://sistemacadastral.netlify.app) para acessar.
 
-## Previews
-<p align="center">
-  <h3>Tela de cadastro</h3>
-  <a href="#nike-store">
-    <img alt="preview" src="./public/img/previewUm.JPG" >
-  </a>
-  
-  <h3>Listagem de cadastros vazia</h3>
-  <a href="#nike-store">
-    <img alt="preview" src="./public/img/previewDois.JPG" >
-  </a>
-  
-  <h3>Simulação de cadastro</h3>
-  <a href="#nike-store">
-    <img alt="preview" src="./public/img/PreviewTres.JPG" >
-  </a>
-  
-   <h3>Listagem de cadastros</h3>
-  <a href="#nike-store">
-    <img alt="preview" src="./public/img/PreviewQuatro.JPG" >
-  </a>
-  
-  <h3>Informações do cadastro</h3>
-  <a href="#nike-store">
-    <img alt="preview" src="./public/img/PreviewCinco.JPG" >
-  </a>
-</p>
-
 ## Contato
 
 Qualquer dúvida ou feedback estarei disponível em qualquer uma das redes sociais abaixo:

@@ -59,7 +59,7 @@ export default function PersonInformation({
         titleOne="Nascimento"
         titleTwo="Idade"
         valueOne={moment(person.birthDate).format('DD/MM/YYYY')}
-        valueTwo={person.age}
+        valueTwo={person.age?.age}
       />
 
       <InformationSection

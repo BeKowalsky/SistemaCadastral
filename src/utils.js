@@ -91,6 +91,8 @@ export const validDocument = (value) => {
 export const validDate = (value) => {
   if (Number.isNaN(value)) {
     return false;
+  } else if (value < 0) {
+    return false;
   }
 
   return true;

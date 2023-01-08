@@ -24,19 +24,28 @@ const FormItem = ({
       <label htmlFor={title} className="font-medium uppercase">
         {title}:
       </label>
-      <InputComponent
-        type={type}
-        id={id}
-        onChange={onChange}
-        onBlur={onBlur}
-        mask={mask}
-        value={value}
-        className={`border-blue-200 rounded-md focus:ring-0 focus:border-blue-500 bg-gray-50 ${
-          disabled ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-        required
-        disabled={disabled}
-      />
+      <div className="relative flex items-center">
+        <InputComponent
+          type={type}
+          id={id}
+          onChange={onChange}
+          onBlur={onBlur}
+          mask={mask}
+          value={value}
+          className={`border-blue-200 rounded-md focus:ring-0 focus:border-blue-500 bg-gray-50 ${
+            disabled ? 'opacity-50 cursor-not-allowed' : ''
+          } w-60`}
+          required
+          disabled={disabled}
+        />
+        <p
+          className={`opacity-30  right-3 ${
+            id === 'age' ? 'absolute' : 'hidden'
+          }`}
+        >
+          Anos
+        </p>
+      </div>
     </div>
   );
 };
@@ -113,6 +122,10 @@ export default function RegisterForm({
     const age = calcAge(target.value);
     if (validDate(age)) {
       setData({ ...data, age });
+      setErro(false);
+    } else {
+      toast.error('Data de aniversário inválida');
+      setErro(true);
     }
   };
 
@@ -216,9 +229,7 @@ export default function RegisterForm({
                 id="age"
                 type="number"
                 value={data.age}
-                onChange={(event) =>
-                  setData({ ...data, age: event.target.value })
-                }
+                disabled
               />
             </FormSection>
 

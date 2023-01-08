@@ -17,7 +17,6 @@ const FormItem = ({
   value,
   disabled,
 }) => {
-  console.log(value);
   const InputComponent = isEmpty(mask) ? 'input' : InputMask;
   return (
     <div className="flex flex-col space-y-2 w-60">
